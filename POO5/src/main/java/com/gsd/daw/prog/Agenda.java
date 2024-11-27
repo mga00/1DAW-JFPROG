@@ -35,7 +35,7 @@ public class Agenda {
 			if(agenda[i]==null) {
 				continue;
 			}
-			if(c==agenda[i]) {
+			if(c.getNombre().equalsIgnoreCase(agenda[i].getNombre())) {
 				return true;
 			}
 		}
