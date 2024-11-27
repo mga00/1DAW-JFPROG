@@ -30,36 +30,37 @@ public class Cuenta {
 		return saldo;
 	}
 
-	public void setSaldo(double saldo) {
+	private void setSaldo(double saldo) {
 		this.saldo = saldo;
 	}
 
-	public Cuenta(String nombreCliente, String numCuenta, double tipoInteres, double saldo) {
+	public Cuenta(String nombreCliente) {
 		this.nombreCliente = nombreCliente;
-		this.numCuenta = numCuenta;
-		this.tipoInteres = tipoInteres;
-		this.saldo = saldo;
+		this.numCuenta = aleatorio();
+		this.tipoInteres = 0.0;
+		this.saldo = 0.0;
+	}
+	
+	private String aleatorio() {
+		String devolver="ES";
+		devolver+=(int)(Math.random()*500000000);
+		return devolver;
 	}
 	
 	public Cuenta() {
 		this.nombreCliente = "";
-		this.numCuenta = "";
+		this.numCuenta = aleatorio();
 		this.tipoInteres = 0.0;
 		this.saldo = 0.0;
 	}
 	
 	public boolean reintegro(double num) {
-		if(this.saldo<0) {
-			System.err.println("El reintegro no se puede realizar por falta de fondos");
-			return false;
-		}
-		if(this.saldo<num) {
+		if(this.saldo<0 || this.saldo<num) {
 			return false;
 		}
 		this.saldo-=num;
 		return true;
 	}
-	
 	
 	@Override
 	public String toString() {
@@ -68,13 +69,11 @@ public class Cuenta {
 	}
 
 	public boolean trasferencia(Cuenta b,double num) {
-		if(this.saldo<num) {
-			System.err.println("La trasferencia no se puede realizar por falta de fondos");
-			return false;
+		if(reintegro(saldo)) {
+			b.ingreso(num);
+			return true;
 		}
-		this.saldo-=num;
-		b.saldo+=num;
-		return true;
+		return false;
 	}
 	
 	public boolean ingreso(double num) {
