@@ -7,6 +7,7 @@ public class Baraja {
 
 	private Carta [] baraja;
 	private int contadorCartas;
+	private int indice=0;
 	
 	public Baraja() {
 		baraja= new Carta[40];
@@ -36,9 +37,48 @@ public class Baraja {
 		}
 	}
 	
-	public Carta siguienteCarta() {
-		Carta siguiente = baraja[0];
-		return siguiente;
+	public String siguienteCarta() {
+		if(indice<baraja.length) {
+			Carta siguiente = baraja[indice++];
+			return siguiente.toString();
+		}
+		return "No hay más cartas";
+	}
+	
+	public int cartasDisponibles() {
+		return baraja.length-indice;
+	}
+	
+	public String cartasMonton() {
+		String barajaFin="";
+		if(indice==0) {
+			System.out.println("No se ha sacado ninguna carta todavía.");
+		}
+		for (int i = indice-1; i >= 0; i--) {
+			barajaFin+=baraja[i].toString();
+		}
+		return barajaFin;
+	}
+	
+	public String mostrarBaraja() {
+		String barajaFin="";
+		for (int i = indice; i < baraja.length; i++) {
+			barajaFin+=baraja[indice].toString();
+			indice++;
+		}
+		return barajaFin;
+	}
+	
+	public String darCartas(int num) {
+		String cartasPedidas="";
+		if(this.baraja.length-indice<num) {
+			System.err.println("No hay suficientes cartas");
+			return "";
+		}
+		for (int i = 0; i < num; i++) {
+			cartasPedidas+=baraja[indice++];
+		}
+		return cartasPedidas;
 	}
 	
 	public void mostrarCartas() {
