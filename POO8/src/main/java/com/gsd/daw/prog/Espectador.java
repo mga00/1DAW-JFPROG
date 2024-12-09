@@ -10,14 +10,15 @@ public class Espectador {
 		this.edad = edad;
 		this.dinero = dinero;
 	}
-	public Espectador() {
+	
 
+	public Espectador() {
 		this.nombre = "";
 		this.edad = 0;
 		this.dinero = 0;
 	}
 	
-	public boolean puedePasar(Cine cine) {
+	/*public boolean puedePasar(Cine cine) {
 		if(this.dinero<cine.getPrecio()) {
 			return false;
 		}
@@ -25,7 +26,7 @@ public class Espectador {
 			return false;
 		}
 		return true;
-	}
+	}*/
 	
 	public double getDinero() {
 		return dinero;
@@ -40,4 +41,8 @@ public class Espectador {
 		return edad;
 	}
 	
+	@Override
+	public String toString() {
+		return "Espectador [nombre=" + nombre + ", edad=" + edad + ", dinero=" + dinero + "]";
+	}
 }

@@ -4,109 +4,111 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Cine {
-	boolean[][] sala=new boolean[8][9];
-	private Pelicula pelicula;
+	
+	private String nombre;
+	private Pelicula p;
 	private double precio;
-	private String[] columna= {"A","B","C","D","E","F","G","H","I"};
-	private int[] fila= {8,7,6,5,4,3,2,1};
+	private Butaca [][] patio;
+	private int columnas;
+	private int filas;
+	private int[] array;
 	
-	/*public String[][] asignacionAsientos() {
-		for (int i = 0; i < sala.length; i++) {
-			for (int j = 0; j < sala[i].length; j++) {
-				sala[i][j]=columna[j]+fila[i];
-			}
-		}
-		return sala;
-	}*/
-	public boolean[][] Cine() {
-		for (int i = 0; i < sala.length; i++) {
-			for (int j = 0; j < sala[i].length; j++) {
-				sala[i][j]=true;
-			}
-		}
-		return sala;
+	public Cine(Pelicula p, double precio,int filas, int columnas) {
+		this.p=p;
+		this.filas = filas;
+		this.columnas=columnas;
+		this.precio = precio;
+		this.patio=generarButacas(filas,columnas);
 	}
 	
-	@Override
-	public String toString() {
-		String fin= "";
-		for (int i = 0; i < this.sala.length; i++) {
-			for (int j = 0; j < this.sala[i].length; j++) {
-				if(j!=this.sala[i].length-1) {
-					fin+=this.sala[i][j]+" ";
-				}else
-					fin+=this.sala[i][j];
-			}
-			if(i<=this.sala.length-1) {
-				fin+="\n";	
+	private  Butaca[][] generarButacas(int f, int c){
+		//columnas==letras
+		Butaca [][] devolver=new Butaca[f][c];
+		for (int i = filas; i > 0; i--) {
+			char letra='A';
+			for (int j = 0; j < c; j++) {
+				devolver[i][j]=new Butaca(Character.toString(letra), Integer.toString(i));
+				letra++;
 			}
 		}
-		return fin;
+		return devolver;
 	}
 	
-	public boolean butacasLibres() {
-		for (int i = 0; i < sala.length; i++) {
-			for (int j = 0; j < sala[i].length; j++) {
-				if(sala[i][j]==true) {
-					return true;
-				}
-			}
-		}
-		return false;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	
-	public void sentar(Espectador e) {
-		if(!e.puedePasar(this)) {
-			System.err.println(e.getNombre()+", no tienes edad o dinero suficiente para entrar");
-		}else {
-			if(!butacasLibres()) {
-				System.err.println("No hay butacas libres");
-				return;
-			}
-			Random rand=new Random();
-			String columnaFin="";
-			for (int fila = 0; fila < sala.length; fila++) {
-				for (int j = 0; j < sala[fila].length; j++) {
-					if(sala[fila][j]==true) {
-						sala[fila][j]=false;
-						switch (j) {
-							case 0: {columnaFin+="A";break;}
-							case 1: {columnaFin+="B";break;}
-							case 2: {columnaFin+="C";break;}
-							case 3: {columnaFin+="D";break;}
-							case 4: {columnaFin+="E";break;}
-							case 5: {columnaFin+="F";break;}
-							case 6: {columnaFin+="G";break;}
-							case 7: {columnaFin+="H";break;}
-							case 8: {columnaFin+="I";break;}
-						
-						}
-						System.out.println("Espectador: "+e.getNombre()+" sentado en la butaca: "+(8-fila)+columnaFin);
-						return;
-					}
-				}
-			}
-		}
-		
-	}
-	
 
-	public Cine(Pelicula pelicula, double precio) {
-		super();
-		this.sala = Cine();
-		this.pelicula = pelicula;
+	public void setP(Pelicula p) {
+		this.p = p;
+	}
+
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	
+
+	public void setPatio(Butaca[][] patio) {
+		this.patio = patio;
+	}
+
+	public void setColumnas(int columnas) {
+		this.columnas = columnas;
+	}
+
+	public void setFilas(int filas) {
+		this.filas = filas;
+	}
+
 	public Pelicula getPelicula() {
-		return pelicula;
+		return p;
 	}
 	public double getPrecio() {
 		return precio;
 	}
-	public boolean[][] getSala() {
-		return sala;
+	
+	public int huecosLibres() {
+		int devolver=0;
+		for (int i = 0; i < patio.length; i++) {
+			for (int j = 0; j < patio[i].length; j++) {
+				if(patio[i][j]==null) {
+					devolver++;
+				}
+			}
+		}
+		return devolver;
 	}
 	
+	public boolean asignarButacaEspectador(Espectador e) {
+		if(e.getEdad()<p.getEdadMinima()) {return false;}
+		if(e.getDinero()<this.precio) {return false;}
+		if(huecosLibres()==0) {return false;}
+		int fila_aleatoria;
+		int columna_aleatoria;
+		boolean sentado=false;
+		
+		do {
+			fila_aleatoria=(int) ((Math.random()*filas))+1;
+			columna_aleatoria=(int) ((Math.random()*columnas))+1;
+			if(patio[fila_aleatoria][columna_aleatoria]==null) {
+				patio[fila_aleatoria][columna_aleatoria].sentarEspectador(e);
+				e.setDinero(e.getDinero()-this.precio);
+				sentado=true;
+			}
+			
+		}while(!sentado);
+		return true;
+	}
+	
+	public void mostrarPatio() {
+		for (int i = 0; i < patio.length; i++) {
+			for (int j = 0; j < patio[i].length; j++) {
+				if(patio[i][j]==null) {
+					System.out.println(patio[i][j].getFila()+""+patio[i][j].getColumna());
+				}else {
+					System.out.println(" ");
+					
+				}
+			}
+		}
+	}
 	
 }
