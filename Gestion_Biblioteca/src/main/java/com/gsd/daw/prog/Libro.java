@@ -6,15 +6,15 @@ public class Libro {
 	private String titulo;
 	private String autor;
 	private String isbn;
-	private int contador=0;
+	private int contador;
 	private double precio;
 	
 	public Libro(String titulo, String autor, String isbn, double precio) {
-		super();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.isbn = isbn;
 		this.precio = precio;
+		this.contador=0;
 	}
 
 	public int getContador() {
@@ -64,7 +64,7 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro [titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", precio=" + precio + "]";
+		return "Libro [titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", precio=" + precio + ", numero de ejemplares: " + contador + "]";
 	}
 	
 }
