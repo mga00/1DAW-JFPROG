@@ -6,7 +6,6 @@ public class Libro {
 	private String titulo;
 	private String autor;
 	private String isbn;
-	private int contador;
 	private double precio;
 	
 	public Libro(String titulo, String autor, String isbn, double precio) {
@@ -14,15 +13,6 @@ public class Libro {
 		this.autor = autor;
 		this.isbn = isbn;
 		this.precio = precio;
-		this.contador=0;
-	}
-
-	public int getContador() {
-		return contador;
-	}
-
-	public void setContador(int contador) {
-		this.contador = contador;
 	}
 
 	public double getPrecio() {
@@ -64,7 +54,7 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return "Libro [titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", precio=" + precio + ", numero de ejemplares: " + contador + "]";
+		return "Libro [titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn + ", precio=" + precio + "]";
 	}
 	
 }
