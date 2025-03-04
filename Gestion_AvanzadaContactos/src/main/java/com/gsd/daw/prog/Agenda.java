@@ -16,6 +16,7 @@ public class Agenda {
 		if (contactos.contains(nombre)) {
 			orden_contactos.add(nombre);
 			telContactos.get(nombre).add(telefono);
+			System.out.println("Telefono añadido.");
 		} else {
 
 		}
