@@ -1,13 +1,15 @@
 package com.gsd.daw.prog;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Agenda {
+public class Agenda implements Serializable{
 	Set<String> contactos=new HashSet<>();
 	List<String> orden_contactos=new ArrayList<>();
 	Map<String, List<String>> telContactos=new HashMap<>();
@@ -45,7 +47,11 @@ public class Agenda {
 			System.err.println("Error: el contacto no esta en la agenda.");
 			return;
 		} else {
-			//TO-DO terminar
+			List <String> lista=telContactos.get(nombre);
+			System.out.println("El contacto "+nombre+" tiene asociados los teléfonos:");
+			for (int i = 0; i < lista.size(); i++) {
+				System.out.println(lista.get(i));
+			}
 		}
 	}
 	public void eliminarTel(String nombre, String telefono) {
@@ -57,7 +63,32 @@ public class Agenda {
 			System.err.println("Error: El contacto no esta en la agenda.");
 			return;
 		}else {
-			
+			telContactos.get(nombre).remove(telefono);
+			System.out.println("Telefono eliminado.");
 		}
 	}
+	public void eliminarContacto(String nombre) {
+		if (!contactos.contains(nombre)) {
+			System.err.println("Error: el contacto no esta en la agenda.");
+			return;
+		}
+		contactos.remove(nombre);
+		/*preguntar si de la lista en orden si hay el mismo nombre varias
+		 *veces hay que eliminarlos todos o solo uno concreto*/
+		telContactos.remove(nombre);
+		System.out.println("Contacto eliminado.");
+	}
+	public void ordenLista() {
+		List<String> listaDesorden=new ArrayList<String>(contactos);
+		Collections.sort(listaDesorden);
+		for (int i = 0; i < listaDesorden.size(); i++) {
+			System.out.println(listaDesorden.get(i));
+		}
+	}
+	@Override
+	public String toString() {
+		return "Agenda [contactos=" + contactos + ", orden_contactos=" + orden_contactos + ", telContactos="
+				+ telContactos + "]";
+	}
+	
 }
