@@ -73,8 +73,11 @@ public class Agenda implements Serializable{
 			return;
 		}
 		contactos.remove(nombre);
-		/*preguntar si de la lista en orden si hay el mismo nombre varias
-		 *veces hay que eliminarlos todos o solo uno concreto*/
+		for (int i = 0; i < orden_contactos.size(); i++) {
+			if(orden_contactos.get(i).equalsIgnoreCase(nombre)) {
+				orden_contactos.remove(i);
+			}
+		}
 		telContactos.remove(nombre);
 		System.out.println("Contacto eliminado.");
 	}

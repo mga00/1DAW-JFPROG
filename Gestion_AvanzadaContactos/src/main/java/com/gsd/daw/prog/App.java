@@ -44,7 +44,7 @@ public class App {
 				}
 			}
 			case 2: {
-				
+				a1.eliminarContacto(nombre);
 				System.out.println("¿Quieres hacer algo más?");
 				String respuesta=sc.nextLine();
 				if(respuesta.equalsIgnoreCase("no")) {
