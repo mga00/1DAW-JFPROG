@@ -10,9 +10,12 @@ public class Curso {
 	public void addEstudiante(Estudiante e) {
 		
 	}
-	public void mostrarEstudiantes() {
+	public void mostrarEstudiante() {
 		for (int i = 0; i < estudiantes.size(); i++) {
 			System.out.println(estudiantes.get(i).toString());
 		}
+	}
+	public void elimiarEstudiante() {
+		
 	}
 }

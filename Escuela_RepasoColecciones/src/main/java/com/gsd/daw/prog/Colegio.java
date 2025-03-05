@@ -7,4 +7,9 @@ import java.util.Map;
 public class Colegio {
 	private List<Map<String, String>> incritos = new ArrayList<>();
 	private List<Estudiante> noInscritos = new ArrayList<>();
+	
+	public void incluirEstudiante() {
+		
+	}
+	public void
 }
