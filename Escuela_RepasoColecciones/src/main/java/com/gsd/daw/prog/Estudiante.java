@@ -2,17 +2,16 @@ package com.gsd.daw.prog;
 
 public class Estudiante {
 	private String nombre;
-	private String apeliido1;
+	private String apellido1;
 	private String apellido2;
 	private String correo;
 	private int id;
 
 	public Estudiante(String nombre, String correo) {
 		this.nombre = nombre;
-		this.apeliido1=apeliido1;
-		this.apeliido2=apeliido2;
+		this.apellido1=apellido1;
+		this.apellido2=apellido2;
 		this.correo = correo;
-		String[] letrasNombre= nombre
 		this.id=1;
 	}
 
@@ -38,6 +37,12 @@ public class Estudiante {
 
 	public String getCorreo() {
 		return correo;
+	}
+
+	@Override
+	public String toString() {
+		return "Estudiante [nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", correo="
+				+ correo + ", id=" + id + "]";
 	}
 
 }

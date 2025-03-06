@@ -8,7 +8,7 @@ import java.util.Map;
 public class RegistroNotas {
 	private Map<String, Map<String, List<Integer>>> notasCursos=new HashMap<>();
 	
-	public void asignarCalificacion(String ID,) {
+	public void asignarCalificacion() {
 		
 	}
 	public void consultarCalificacion() {
