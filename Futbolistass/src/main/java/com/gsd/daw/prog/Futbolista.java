@@ -14,7 +14,11 @@ public class Futbolista {
 	}
 	@Override
 	public String toString() {
-		return "Futbolista [nombre=" + nombre + ", dorsal=" + dorsal + ", dem=" + dem + ", eq=" + eq + "]";
+		return "Futbolista [nombre=" + nombre + ", dorsal=" + dorsal + ", dem=" + dem + ", eq=" + eq + ", posicion= "+eq.getPosicion()+ "]";
 	}
 	
+	public void bajarPos() {
+		if (this.eq.getPosicion() == Equipo.values().length) return;
+		this.eq.setPosicion(eq.getPosicion()+1);
+	}
 }
