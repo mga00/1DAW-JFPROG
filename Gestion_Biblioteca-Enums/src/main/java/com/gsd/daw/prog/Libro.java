@@ -12,5 +12,21 @@ public class Libro {
 		this.anoPub = anoPub;
 		this.cat = cat;
 	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public String getAutor() {
+		return autor;
+	}
+
+	public String getAnoPub() {
+		return anoPub;
+	}
+
+	public Categoria getCat() {
+		return cat;
+	}
 	
 }
